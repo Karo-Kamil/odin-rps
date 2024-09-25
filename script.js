@@ -35,8 +35,10 @@ function checkPlayerChoice() {
     }
 }
 
-function playRound(playerChoice, computerChoice){
+function playRound(){
     let score = 0;
+    let playerChoice = checkPlayerChoice();
+    let computerChoice = getComputerChoice();
     switch (playerChoice){
         case computerChoice:
             console.log("You had a draw with the computer");
@@ -73,7 +75,38 @@ function playRound(playerChoice, computerChoice){
 }
 
 
-let computerSelection = getComputerChoice();
-let playerSelection = checkPlayerChoice();
+//let computerSelection = getComputerChoice();
+//let playerSelection = checkPlayerChoice();
 
-console.log(playRound(playerSelection, computerSelection));
+function bestOfFive() {
+    let roundNum = 0;
+    let humanScore = 0;
+    let computerScore = 0;
+    let result = 0;
+    while (roundNum < 5) {
+        result = playRound();
+        switch (result){
+            case 0:
+                roundNum++;
+                break;
+            case 1:
+                roundNum++;
+                humanScore++;
+                break;
+            case -1:
+                roundNum++;
+                computerScore++;
+                break;
+
+        }
+    }
+    if (humanScore > computerScore) {
+        return console.log("Congratulations you won! Your score was: " + humanScore + " The computer's score was: " + computerScore);
+    } else if (humanScore < computerScore) {
+        return console.log("Sorry you lost! Your score was: " + humanScore + " The computer's score was: " + computerScore);
+    } else {
+        return console.log("You had a tie! You both got the same score.");
+    }
+}
+
+bestOfFive();
