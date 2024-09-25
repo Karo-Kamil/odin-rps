@@ -35,8 +35,45 @@ function checkPlayerChoice() {
     }
 }
 
-let computerChoice = getComputerChoice();
-let playerChoice = checkPlayerChoice();
+function playRound(playerChoice, computerChoice){
+    let score = 0;
+    switch (playerChoice){
+        case computerChoice:
+            console.log("You had a draw with the computer");
+            break;
+        case "rock":
+            if (computerChoice === "scissors"){
+                console.log("You win! Rock beats scissors.")
+                score++
+            } else if (computerChoice === "paper"){
+                console.log("you lose! paper beats rock.")
+                score--
+            }
+            break;
+        case "paper":
+            if (computerChoice === "rock"){
+                console.log("You win! Paper beats rock.")
+                score++
+            } else if (computerChoice === "scissors"){
+                console.log("you lose! Scissors beat paper.")
+                score--
+            }
+            break;
+        case "scissors":
+            if (computerChoice === "paper"){
+                console.log("You win! Scissors beat paper.")
+                score++
+            } else if (computerChoice === "rock"){
+                console.log("you lose! Rock beats scissors.")
+                score--
+            }
+            break;
+    }
+    return score;
+}
 
-console.log(computerChoice);
-console.log(playerChoice);
+
+let computerSelection = getComputerChoice();
+let playerSelection = checkPlayerChoice();
+
+console.log(playRound(playerSelection, computerSelection));
