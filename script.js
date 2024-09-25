@@ -101,11 +101,11 @@ function bestOfFive() {
         }
     }
     if (humanScore > computerScore) {
-        return console.log("Congratulations you won! Your score was: " + humanScore + " The computer's score was: " + computerScore);
+        return alert("Congratulations you won! Your score was: " + humanScore + " The computer's score was: " + computerScore);
     } else if (humanScore < computerScore) {
-        return console.log("Sorry you lost! Your score was: " + humanScore + " The computer's score was: " + computerScore);
+        return alert("Sorry you lost! Your score was: " + humanScore + " The computer's score was: " + computerScore);
     } else {
-        return console.log("You had a tie! You both got the same score.");
+        return alert("You had a tie! You both got the same score.");
     }
 }
 
