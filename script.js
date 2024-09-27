@@ -1,3 +1,31 @@
+const list = document.querySelector("ul");
+const playerScore = document.querySelector(".human");
+const compScore = document.querySelector(".comp");
+const announcements = document.querySelector(".anno");
+const final = document.querySelector(".finish");
+
+list.addEventListener("click", (event) =>{
+    let target = event.target;
+
+    switch (target.id) {
+        case "rock":
+            playRound("rock");
+            break;
+        case "paper":
+            playRound("paper");
+            break;
+        case "scissors":
+            playRound("scissors");
+            break;
+    }
+
+})
+
+
+
+
+
+
 function getComputerChoice() {
     let value = Math.floor(Math.random() * 3);
     let guess = ""
@@ -18,9 +46,12 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    let choice = prompt("Please type down your choice.", "");
-    choice = choice.toLowerCase();
-    return choice;
+    btn.forEach((button) =>{
+        button.addEventListener("click", () => {
+            console.log(button.id);
+            playRound(button.id);
+        })
+    })
 
 }
 
@@ -35,43 +66,57 @@ function checkPlayerChoice() {
     }
 }
 
-function playRound(){
-    let score = 0;
-    let playerChoice = checkPlayerChoice();
+let pScore = 0;
+let cScore = 0;
+
+function playRound(playerSelect){
+    final.textContent = "";
+    let playerChoice = playerSelect;
     let computerChoice = getComputerChoice();
     switch (playerChoice){
         case computerChoice:
-            console.log("You had a draw with the computer");
+            announcements.textContent = "You had a draw with the computer";
             break;
         case "rock":
             if (computerChoice === "scissors"){
-                console.log("You win! Rock beats scissors.")
-                score++
+               announcements.textContent = "You win! Rock beats scissors.";
+                pScore++;
             } else if (computerChoice === "paper"){
-                console.log("you lose! paper beats rock.")
-                score--
+                announcements.textContent = "you lose! paper beats rock.";
+                cScore++;
             }
             break;
         case "paper":
             if (computerChoice === "rock"){
-                console.log("You win! Paper beats rock.")
-                score++
+                announcements.textContent = "You win! Paper beats rock.";
+                pScore++
             } else if (computerChoice === "scissors"){
-                console.log("you lose! Scissors beat paper.")
-                score--
+                announcements.textContent = "you lose! Scissors beat paper.";
+                cScore++;
             }
             break;
         case "scissors":
             if (computerChoice === "paper"){
-                console.log("You win! Scissors beat paper.")
-                score++
+                announcements.textContent = "You win! Scissors beat paper.";
+                pScore++;
             } else if (computerChoice === "rock"){
-                console.log("you lose! Rock beats scissors.")
-                score--
+                announcements.textContent = "you lose! Rock beats scissors.";
+                cScore++;
             }
             break;
     }
-    return score;
+    compScore.textContent = cScore;
+    playerScore.textContent = pScore;
+    if (pScore === 5) {
+        final.textContent = "Congratulations! You won.";
+        pScore = 0;
+        cScore = 0;
+    } else if (cScore === 5) {
+        final.textContent = "Game Over! You lost.";
+        pScore = 0;
+        cScore = 0;
+    }
+    //return score;
 }
 
 
@@ -109,4 +154,3 @@ function bestOfFive() {
     }
 }
 
-bestOfFive();
